@@ -1,0 +1,19 @@
+# 忽略构建目录
+/build/
+
+# 忽略所有 CMake 生成的文件
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+*.cmake
+
+# 忽略二进制文件
+*.o
+*.a
+*.so
+*.out
+*.exe
+
+# 忽略 VS Code 设置文件夹
+.vscode/
