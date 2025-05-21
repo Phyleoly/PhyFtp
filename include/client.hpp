@@ -1,23 +1,29 @@
 #ifndef CLIENT_HPP
 #define CLIENT_HPP
 
-#include <boost/asio.hpp>
+#include <boost/asio/io_context.hpp>
+#include <boost/asio/ip/tcp.hpp>
 #include <vector>
+#include <memory>
 
 class TCPClient
 {
-public:
-    TCPClient(boost::asio::io_contex& _io_contex, uint32_t host, uint16_t port);
+    using io_contex_p = std::unique_ptr<boost::asio::io_context>;
+    using socket_p = std::unique_ptr<boost::asio::ip::tcp::socket>;
 
-    void send(const std::vecotr<uint8_t>& data);
-    std::vecotr<uint8_t> receive();
+public:
+    TCPClient (uint32_t host, uint16_t port);
+
+    void send(const std::vector<uint8_t>& data);
+    std::vector<uint8_t> receive();
 
     void close();
 
     ~TCPClient();
+
 private:
-    boost::asio::io_contex& _io_contex;
-    tcp::socket _socket;
+    io_contex_p _io_contex;
+    socket_p _socket;
 };
 
 #endif // !CLIENT_HPP
